@@ -25,7 +25,7 @@ export const DUMMY_PROJECTS: Project[] = [
     role: "Director, Editor",
     tools: "Sony FX3, DaVinci Resolve",
     creative_process: "Three weeks of early-morning shoots, edited around ambient sound.",
-    final_result_media_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    final_result_media_url: "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
     featured: true,
   },
   {
@@ -77,7 +77,7 @@ export const DUMMY_PROJECTS: Project[] = [
     role: "Researcher",
     tools: "Survey design, SPSS",
     creative_process: null,
-    final_result_media_url: "https://drive.google.com/file/d/example/view",
+    final_result_media_url: "https://example.com/not-a-video", // invalid on purpose: shows thumbnail only
     featured: false,
   },
   {
