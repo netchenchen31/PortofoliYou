@@ -4,19 +4,21 @@
 // so it can show errors and the success message without reloading the page.
 
 import { useActionState } from "react";
+import { ArrowRight, CircleCheck } from "lucide-react";
 import { CATEGORIES } from "@/lib/types";
 import { sendContact } from "./actions";
 import { emptyContactState, type ContactField } from "./state";
 
 const input =
-  "w-full rounded-lg border bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-stone-400";
+  "w-full rounded-lg border bg-stone-50 px-3 py-2.5 outline-none focus:ring-2 focus:ring-stone-400 dark:bg-stone-950";
 
 export default function ContactForm() {
   const [state, formAction, pending] = useActionState(sendContact, emptyContactState);
 
   if (state.status === "success") {
     return (
-      <div role="status" className="flex flex-col gap-2 rounded-xl border border-green-300 bg-green-50 p-6 text-green-900 dark:border-green-800 dark:bg-green-950 dark:text-green-100">
+      <div role="status" className="flex flex-col items-center gap-3 py-10 text-center">
+        <CircleCheck aria-hidden className="h-10 w-10 text-green-600 dark:text-green-400" />
         <p className="text-lg font-semibold">Thank you! Your message has been sent.</p>
         <p>I&apos;ll get back to you by email as soon as I can.</p>
       </div>
@@ -57,7 +59,7 @@ export default function ContactForm() {
         <label htmlFor="project_type" className="font-medium">
           Project type <span className="font-normal text-stone-500">(optional)</span>
         </label>
-        <select id="project_type" name="project_type" defaultValue={state.values.project_type} className={`${input} ${border("project_type")} dark:bg-stone-900`}>
+        <select id="project_type" name="project_type" defaultValue={state.values.project_type} className={`${input} ${border("project_type")}`}>
           <option value="">Choose one…</option>
           {CATEGORIES.map((c) => (
             <option key={c} value={c}>{c}</option>
@@ -81,9 +83,9 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={pending}
-        className="self-start rounded-full bg-stone-900 px-6 py-2.5 font-medium text-white hover:bg-stone-700 disabled:opacity-50 dark:bg-stone-100 dark:text-stone-900 dark:hover:bg-stone-300"
+        className="flex items-center justify-center gap-2 rounded-lg bg-stone-900 px-6 py-3 font-medium text-white hover:bg-stone-700 disabled:opacity-50 dark:bg-stone-100 dark:text-stone-900 dark:hover:bg-stone-300"
       >
-        {pending ? "Sending…" : "Send message"}
+        {pending ? "Sending…" : <>Send message <ArrowRight aria-hidden className="h-4 w-4" /></>}
       </button>
     </form>
   );
