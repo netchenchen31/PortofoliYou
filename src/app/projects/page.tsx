@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
-import CategoryPicker from "@/components/CategoryPicker";
+import { ArrowLeft, SquarePen } from "lucide-react";
 import ProjectCard from "@/components/ProjectCard";
 import { CATEGORIES, type Category, type Project } from "@/lib/types";
 import { getProjects } from "@/lib/projects";
@@ -9,8 +8,8 @@ import { findPurpose, type PurposeId } from "@/lib/purposes";
 // Projects ("Work") screen.
 // /projects                                  → everything, with category chips
 // /projects?category=Film&category=Design    → projects tagged Film OR Design
-// /projects?purpose=hiring(&category=…)      → category cards on top; tapping one
-//                                              updates the list straight away
+// /projects?purpose=hiring&category=Film      → "Hiring / Recruiting × Film" header
+//                                              (category chosen on /interests)
 // /projects?purpose=academic&category=Research, /projects?purpose=explore
 export default async function ProjectsPage({ searchParams }: PageProps<"/projects">) {
   const { category, purpose: purposeId } = await searchParams;
@@ -24,32 +23,31 @@ export default async function ProjectsPage({ searchParams }: PageProps<"/project
   const projects = await getProjects(selected); // newest first
   const list = <ProjectGrid projects={projects} selected={selected} purpose={purpose?.id} />;
 
-  // Hiring & collaborator: pick categories right here
-  if (purpose && (purpose.id === "hiring" || purpose.id === "collaborator")) {
-    return (
-      <Shell>
-        <div className="flex flex-col gap-2">
-          <p className="text-xs font-medium uppercase tracking-widest text-stone-500 dark:text-stone-400">
-            You&apos;re here: {purpose.title}
-          </p>
-          <h1 className="text-3xl font-bold">What type of work are you interested in?</h1>
-          <p className="text-stone-600 dark:text-stone-400">Select one or more categories to see relevant projects.</p>
-        </div>
-        {/* key: start fresh if the address changes another way (e.g. Back button) */}
-        <CategoryPicker key={selected.join()} purpose={purpose.id} initial={selected}>
-          {list}
-        </CategoryPicker>
-      </Shell>
-    );
-  }
-
-  // Academic / explore: no picker, just the list
+  // Visitor came through "What brings you here?"
   if (purpose) {
+    const picksCategory = purpose.id === "hiring" || purpose.id === "collaborator";
     return (
       <Shell>
-        <div className="flex flex-col gap-1">
-          <p className="text-sm text-stone-500 dark:text-stone-400">Showing projects for</p>
-          <h1 className="text-3xl font-bold">{purpose.title}</h1>
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div className="flex flex-col gap-1">
+            <p className="text-sm text-stone-500 dark:text-stone-400">Showing projects for</p>
+            <h1 className="text-3xl font-bold">
+              {purpose.title}
+              {picksCategory && (
+                <>
+                  <span className="font-normal text-stone-400"> × </span>
+                  {selected.length ? selected.join(", ") : "All work"}
+                </>
+              )}
+            </h1>
+          </div>
+          {/* back to the category cards (hiring/collab) or to Home (academic/explore) */}
+          <Link
+            href={picksCategory ? { pathname: "/interests", query: { purpose: purpose.id } } : "/"}
+            className="flex items-center gap-1.5 text-sm font-medium underline"
+          >
+            <SquarePen aria-hidden className="h-4 w-4" /> Edit selection
+          </Link>
         </div>
         {list}
       </Shell>
