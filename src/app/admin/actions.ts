@@ -42,6 +42,10 @@ export async function saveProject(
 
   const text = (key: string) => String(formData.get(key) ?? "").trim();
   const optional = (key: string) => text(key) || null; // empty box → stored as "nothing"
+  // "Short Film, Documentary" → ["Short Film", "Documentary"]
+  const commaList = (key: string) => text(key).split(",").map((t) => t.trim()).filter(Boolean);
+  // one link per line → list of links
+  const lineList = (key: string) => text(key).split(/\r?\n/).map((t) => t.trim()).filter(Boolean);
   const id = text("id");
 
   const project = {
@@ -58,6 +62,16 @@ export async function saveProject(
     creative_process: optional("creative_process"),
     final_result_media_url: optional("final_result_media_url"),
     featured: formData.get("featured") === "on",
+    // Purpose-based detail page
+    tagline: optional("tagline"),
+    tags: commaList("tags"),
+    duration: optional("duration"),
+    gallery: lineList("gallery"),
+    key_skills: optional("key_skills"),
+    responsibilities: optional("responsibilities"),
+    contribution: optional("contribution"),
+    production_experience: optional("production_experience"),
+    process_images: lineList("process_images"),
   };
 
   // Save is blocked until these are fixed
@@ -72,6 +86,10 @@ export async function saveProject(
     errors.thumbnail = "Must be a link starting with https://";
   if (project.final_result_media_url && !URL_OR_PATH.test(project.final_result_media_url))
     errors.final_result_media_url = "Must be a link starting with https://";
+  if (project.gallery.some((link) => !URL_OR_PATH.test(link)))
+    errors.gallery = "Each line must be a link starting with https://";
+  if (project.process_images.some((link) => !URL_OR_PATH.test(link)))
+    errors.process_images = "Each line must be a link starting with https://";
   if (Object.keys(errors).length > 0) return { errors };
 
   const { error } = id

@@ -13,7 +13,16 @@ export type ProjectField =
   | "role"
   | "tools"
   | "creative_process"
-  | "final_result_media_url";
+  | "final_result_media_url"
+  | "tagline"
+  | "tags"
+  | "duration"
+  | "gallery"
+  | "key_skills"
+  | "responsibilities"
+  | "contribution"
+  | "production_experience"
+  | "process_images";
 
 export type ProjectFormState = {
   errors: Partial<Record<ProjectField | "form", string>>;

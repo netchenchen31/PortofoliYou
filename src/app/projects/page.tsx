@@ -100,7 +100,7 @@ function ProjectGrid({ projects, selected, purpose }: { projects: Project[]; sel
         </p>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} purpose={purpose} />
+            <ProjectCard key={project.id} project={project} purpose={purpose} categories={selected} />
           ))}
         </div>
       </div>

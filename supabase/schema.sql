@@ -35,7 +35,18 @@ create table public.projects (
   -- External link only (YouTube / Vimeo / Google Drive). No file uploads.
   final_result_media_url text,
 
-  featured boolean not null default false
+  featured boolean not null default false,
+
+  -- Purpose-based detail pages (added in supabase/updates/001_detail_fields.sql)
+  tagline               text,                          -- one-line summary under the title
+  tags                  text[] not null default '{}',  -- extra labels, e.g. {Short Film, Documentary}
+  duration              text,                          -- e.g. 4:32 (shown on the thumbnail)
+  gallery               text[] not null default '{}',  -- image links (stills under the video)
+  key_skills            text,                          -- For Recruiters
+  responsibilities      text,                          -- For Recruiters
+  contribution          text,                          -- For Collaborators
+  production_experience text,                          -- For Collaborators
+  process_images        text[] not null default '{}'   -- For Collaborators (creative process)
 );
 
 -- Speeds up "show projects in category X" once there are many projects.

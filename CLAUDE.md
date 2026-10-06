@@ -26,6 +26,8 @@ Next.js (App Router, TypeScript, `src/`) · Tailwind CSS · Supabase (Postgres +
 - `src/lib/profile.ts` — owner's name, bio, skills, experience, education, CV link (not in DB).
 - `src/lib/projects.ts` — reads projects from Supabase (`src/lib/supabase.ts` = connection).
 - `src/app/admin/` — login, dashboard, project form; `src/lib/supabase-server.ts` = logged-in connection + `requireAdmin()`; `src/proxy.ts` guards `/admin`.
+- `supabase/updates/` — numbered SQL changes for an existing database (run once each, in order);
+  `schema.sql` always holds the full current table for a fresh project.
 - `supabase/seed.sql` — optional sample projects (thumbnails in `public/dummy/`).
 - Env vars (see `.env.example`): `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`.
   They are baked in at build time, so Vercel must redeploy after they change.
