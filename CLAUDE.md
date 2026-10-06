@@ -23,6 +23,8 @@ Next.js (App Router, TypeScript, `src/`) · Tailwind CSS · Supabase (Postgres +
 - `supabase/schema.sql` — database tables + access rules (run in Supabase SQL Editor).
 - `src/lib/types.ts` — TypeScript shapes matching the tables. Keep in sync with schema.
 - `src/app/` — pages (one folder per route).
+- `src/lib/profile.ts` — owner's name, bio, skills, experience, education, CV link (not in DB).
+- `src/lib/dummy-data.ts` — temporary sample projects; replaced by Supabase in Phase 3.
 
 ## Screens & logic (summary)
 - Home: intro, profile, category selector → Projects filtered; featured projects (`featured = true`).
@@ -38,7 +40,7 @@ Next.js (App Router, TypeScript, `src/`) · Tailwind CSS · Supabase (Postgres +
 
 ## Phases
 1. Setup: project, schema ✅
-2. UI screens with dummy data (no database yet)
+2. UI screens with dummy data (no database yet) ✅
 3+. Connect Supabase, admin, deploy checks
 
 ## Completion proof

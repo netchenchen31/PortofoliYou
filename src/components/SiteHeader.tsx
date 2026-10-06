@@ -4,6 +4,7 @@ import Link from "next/link";
 const NAV = [
   { href: "/projects", label: "Projects" },
   { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function SiteHeader() {
