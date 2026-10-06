@@ -4,16 +4,6 @@
 
 import type { Project } from "./types";
 
-// Profile text shown on Home (and later About). Replace with your real details.
-export const PROFILE = {
-  name: "Your Name",
-  headline: "Filmmaker · Animator · Designer · Researcher",
-  intro:
-    "I tell stories across film, animation, design, content creation and research. " +
-    "Pick a category below to see only the work that's relevant to you.",
-  photo: null as string | null, // image URL, or null to show initials
-};
-
 export const DUMMY_PROJECTS: Project[] = [
   {
     id: "1",

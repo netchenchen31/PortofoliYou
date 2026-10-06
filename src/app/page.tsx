@@ -1,37 +1,19 @@
 import Link from "next/link";
 import ProjectCard from "@/components/ProjectCard";
 import { CATEGORIES } from "@/lib/types";
-import { DUMMY_PROJECTS, PROFILE } from "@/lib/dummy-data";
+import Avatar from "@/components/Avatar";
+import { DUMMY_PROJECTS } from "@/lib/dummy-data";
+import { PROFILE } from "@/lib/profile";
 
 // Home screen: intro + profile, category selector, featured projects.
 export default function Home() {
   const featured = DUMMY_PROJECTS.filter((p) => p.featured);
-  const initials = PROFILE.name
-    .split(" ")
-    .map((word) => word[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
 
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-16 px-4 py-12 sm:px-8">
       {/* 1. Intro + profile */}
       <section className="flex flex-col items-center gap-6 text-center sm:flex-row sm:text-left">
-        {PROFILE.photo ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={PROFILE.photo}
-            alt={PROFILE.name}
-            className="h-28 w-28 shrink-0 rounded-full object-cover"
-          />
-        ) : (
-          <div
-            aria-hidden
-            className="flex h-28 w-28 shrink-0 items-center justify-center rounded-full bg-zinc-200 text-3xl font-bold text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300"
-          >
-            {initials}
-          </div>
-        )}
+        <Avatar />
         <div className="flex flex-col gap-2">
           <h1 className="text-4xl font-bold">{PROFILE.name}</h1>
           <p className="text-lg font-medium text-zinc-600 dark:text-zinc-400">
