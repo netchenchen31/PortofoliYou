@@ -17,15 +17,13 @@ export function findPurpose(id: unknown) {
 }
 
 // Where each Home card leads.
-// Hiring & collaborator → pick categories first. Academic → straight to
-// Research projects. Explore → straight to everything.
+// Hiring & collaborator → Projects page with the category cards on top.
+// Academic → straight to Research projects. Explore → straight to everything.
 export function purposeHref(id: PurposeId) {
   switch (id) {
     case "academic":
       return { pathname: "/projects", query: { purpose: id, category: "Research" satisfies Category } };
-    case "explore":
-      return { pathname: "/projects", query: { purpose: id } };
     default:
-      return { pathname: "/interests", query: { purpose: id } };
+      return { pathname: "/projects", query: { purpose: id } };
   }
 }
