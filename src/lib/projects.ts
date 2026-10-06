@@ -6,8 +6,8 @@ import type { Category, Project } from "./types";
 // which tells Next.js to fetch fresh data on every visit — so an edit in the
 // admin dashboard shows up right away, without redeploying.
 
-const COLUMNS =
-  "id, title, year, category, thumbnail, description, role, tools, creative_process, final_result_media_url, featured";
+// "*" = every column, so new columns added to the table show up automatically
+const COLUMNS = "*";
 
 // Newest first, then A–Z
 function query() {
@@ -18,11 +18,11 @@ function query() {
     .order("title", { ascending: true });
 }
 
-// All projects, or only those whose category list includes `category`
-export async function getProjects(category?: Category): Promise<Project[]> {
+// All projects (no categories given), or those tagged with ANY of `categories`
+export async function getProjects(categories: Category[] = []): Promise<Project[]> {
   await connection();
-  const { data, error } = category
-    ? await query().contains("category", [category])
+  const { data, error } = categories.length
+    ? await query().overlaps("category", categories)
     : await query();
   if (error) throw new Error(`Could not load projects: ${error.message}`);
   return data as Project[];

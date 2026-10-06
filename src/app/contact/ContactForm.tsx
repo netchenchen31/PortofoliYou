@@ -9,7 +9,7 @@ import { sendContact } from "./actions";
 import { emptyContactState, type ContactField } from "./state";
 
 const input =
-  "w-full rounded-lg border bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-zinc-400";
+  "w-full rounded-lg border bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-stone-400";
 
 export default function ContactForm() {
   const [state, formAction, pending] = useActionState(sendContact, emptyContactState);
@@ -25,7 +25,7 @@ export default function ContactForm() {
 
   // Red border + message under a field that has an error
   const border = (field: ContactField) =>
-    state.errors[field] ? "border-red-500" : "border-zinc-300 dark:border-zinc-700";
+    state.errors[field] ? "border-red-500" : "border-stone-300 dark:border-stone-700";
   const error = (field: ContactField) =>
     state.errors[field] && (
       <p id={`${field}-error`} className="text-sm text-red-600 dark:text-red-400">
@@ -55,9 +55,9 @@ export default function ContactForm() {
 
       <div className="flex flex-col gap-1.5">
         <label htmlFor="project_type" className="font-medium">
-          Project type <span className="font-normal text-zinc-500">(optional)</span>
+          Project type <span className="font-normal text-stone-500">(optional)</span>
         </label>
-        <select id="project_type" name="project_type" defaultValue={state.values.project_type} className={`${input} ${border("project_type")} dark:bg-zinc-900`}>
+        <select id="project_type" name="project_type" defaultValue={state.values.project_type} className={`${input} ${border("project_type")} dark:bg-stone-900`}>
           <option value="">Choose one…</option>
           {CATEGORIES.map((c) => (
             <option key={c} value={c}>{c}</option>
@@ -81,7 +81,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={pending}
-        className="self-start rounded-full bg-zinc-900 px-6 py-2.5 font-medium text-white hover:bg-zinc-700 disabled:opacity-50 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
+        className="self-start rounded-full bg-stone-900 px-6 py-2.5 font-medium text-white hover:bg-stone-700 disabled:opacity-50 dark:bg-stone-100 dark:text-stone-900 dark:hover:bg-stone-300"
       >
         {pending ? "Sending…" : "Send message"}
       </button>

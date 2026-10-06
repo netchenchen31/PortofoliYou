@@ -3,11 +3,10 @@
 // messages), so you change it by editing this file. Replace the sample text.
 
 export const PROFILE = {
-  name: "Your Name",
+  name: "Nethania",
   headline: "Filmmaker · Animator · Designer · Researcher",
-  intro:
-    "I tell stories across film, animation, design, content creation and research. " +
-    "Pick a category below to see only the work that's relevant to you.",
+  intro: "A visual storyteller across film, animation, design, and more.",
+  heroImage: "/dummy/hero.svg", // big photo at the top of Home (image link)
   photo: null as string | null, // image URL, or null to show initials
 
   // About page

@@ -45,16 +45,16 @@ export default async function AdminDashboard({ searchParams }: PageProps<"/admin
         </div>
 
         {projects.length === 0 ? (
-          <p className="text-zinc-500">No projects yet. Click “Add project” to create your first one.</p>
+          <p className="text-stone-500">No projects yet. Click “Add project” to create your first one.</p>
         ) : (
-          <ul className="divide-y divide-zinc-200 rounded-xl border border-zinc-200 dark:divide-zinc-800 dark:border-zinc-800">
+          <ul className="divide-y divide-stone-200 rounded-xl border border-stone-200 dark:divide-stone-800 dark:border-stone-800">
             {projects.map((p) => (
               <li key={p.id} className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex flex-col gap-1">
                   <Link href={`/projects/${p.id}`} className="font-semibold hover:underline">
                     {p.title}
                   </Link>
-                  <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                  <p className="text-sm text-stone-500 dark:text-stone-400">
                     {p.year} · {p.category.join(", ")}
                   </p>
                 </div>
@@ -82,19 +82,19 @@ export default async function AdminDashboard({ searchParams }: PageProps<"/admin
       <section className="flex flex-col gap-4">
         <h2 className="text-2xl font-semibold">Messages ({messages.length})</h2>
         {messages.length === 0 ? (
-          <p className="text-zinc-500">No messages yet.</p>
+          <p className="text-stone-500">No messages yet.</p>
         ) : (
           <ul className="flex flex-col gap-4">
             {messages.map((m) => (
-              <li key={m.id} className="flex flex-col gap-2 rounded-xl border border-zinc-200 p-4 dark:border-zinc-800">
+              <li key={m.id} className="flex flex-col gap-2 rounded-xl border border-stone-200 p-4 dark:border-stone-800">
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
                   <p className="font-semibold">
                     {m.name}{" "}
-                    <a href={`mailto:${m.email}`} className="font-normal text-zinc-500 underline dark:text-zinc-400">
+                    <a href={`mailto:${m.email}`} className="font-normal text-stone-500 underline dark:text-stone-400">
                       {m.email}
                     </a>
                   </p>
-                  <time dateTime={m.submitted_at} className="text-sm text-zinc-500 dark:text-zinc-400">
+                  <time dateTime={m.submitted_at} className="text-sm text-stone-500 dark:text-stone-400">
                     {new Date(m.submitted_at).toLocaleString("en-GB", {
                       dateStyle: "medium",
                       timeStyle: "short",
@@ -103,7 +103,7 @@ export default async function AdminDashboard({ searchParams }: PageProps<"/admin
                   </time>
                 </div>
                 {m.project_type && (
-                  <p className="text-sm text-zinc-500 dark:text-zinc-400">Project type: {m.project_type}</p>
+                  <p className="text-sm text-stone-500 dark:text-stone-400">Project type: {m.project_type}</p>
                 )}
                 <p className="whitespace-pre-wrap">{m.message}</p>
               </li>

@@ -31,6 +31,10 @@ Next.js (App Router, TypeScript, `src/`) · Tailwind CSS · Supabase (Postgres +
   They are baked in at build time, so Vercel must redeploy after they change.
 
 ## Screens & logic (summary)
+- Visitor flow (owner's redesign): Home "What brings you here?" → hiring/collaborator pick categories
+  on `/interests` (multi-select; "Other" = all) → `/projects?purpose=…&category=…` (any match, newest first).
+  Academic → Research projects; explore → everything. Purpose lives only in the URL (no tracking).
+  Detail view varies by purpose (Recruiters / Collaborators panels) — see `src/lib/purposes.ts`.
 - Home: intro, profile, category selector → Projects filtered; featured projects (`featured = true`).
 - Projects: show project if selected category ∈ project.category. Friendly empty state.
 - Project Detail: all fields; media is an external link (YouTube/Vimeo/Drive); if invalid,

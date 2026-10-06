@@ -13,20 +13,20 @@ export default function AboutPage() {
         <Avatar />
         <div className="flex flex-col gap-3">
           <h1 className="text-4xl font-bold">{PROFILE.name}</h1>
-          <p className="text-lg font-medium text-zinc-600 dark:text-zinc-400">{PROFILE.headline}</p>
-          <p className="leading-relaxed text-zinc-700 dark:text-zinc-300">{PROFILE.bio}</p>
+          <p className="text-lg font-medium text-stone-600 dark:text-stone-400">{PROFILE.headline}</p>
+          <p className="leading-relaxed text-stone-700 dark:text-stone-300">{PROFILE.bio}</p>
           <div className="mt-2">
             {PROFILE.cvUrl ? (
               <a
                 href={PROFILE.cvUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block rounded-full bg-zinc-900 px-5 py-2 font-medium text-white hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
+                className="inline-block rounded-full bg-stone-900 px-5 py-2 font-medium text-white hover:bg-stone-700 dark:bg-stone-100 dark:text-stone-900 dark:hover:bg-stone-300"
               >
                 Download CV
               </a>
             ) : (
-              <p className="text-sm text-zinc-500 dark:text-zinc-400">CV coming soon.</p>
+              <p className="text-sm text-stone-500 dark:text-stone-400">CV coming soon.</p>
             )}
           </div>
         </div>
@@ -39,7 +39,7 @@ export default function AboutPage() {
           {PROFILE.skills.map((skill) => (
             <li
               key={skill}
-              className="rounded-full border border-zinc-300 px-3 py-1 text-sm dark:border-zinc-700"
+              className="rounded-full border border-stone-300 px-3 py-1 text-sm dark:border-stone-700"
             >
               {skill}
             </li>
@@ -64,15 +64,15 @@ function Timeline({
   return (
     <section className="flex flex-col gap-4">
       <h2 className="text-2xl font-semibold">{heading}</h2>
-      <ol className="flex flex-col gap-6 border-l border-zinc-200 pl-6 dark:border-zinc-800">
+      <ol className="flex flex-col gap-6 border-l border-stone-200 pl-6 dark:border-stone-800">
         {items.map((item) => (
           <li key={item.title + item.period} className="flex flex-col gap-1">
             <div className="flex flex-col justify-between gap-1 sm:flex-row sm:items-baseline">
               <h3 className="font-semibold">{item.title}</h3>
-              <span className="text-sm text-zinc-500 dark:text-zinc-400">{item.period}</span>
+              <span className="text-sm text-stone-500 dark:text-stone-400">{item.period}</span>
             </div>
-            <p className="text-zinc-600 dark:text-zinc-400">{item.place}</p>
-            {item.detail && <p className="text-zinc-700 dark:text-zinc-300">{item.detail}</p>}
+            <p className="text-stone-600 dark:text-stone-400">{item.place}</p>
+            {item.detail && <p className="text-stone-700 dark:text-stone-300">{item.detail}</p>}
           </li>
         ))}
       </ol>

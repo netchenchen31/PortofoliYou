@@ -48,7 +48,7 @@ export default function ProjectForm({ project }: { project?: Project }) {
       </Field>
 
       <fieldset className="flex flex-col gap-2" aria-describedby={errors.category ? "category-error" : undefined}>
-        <legend className="mb-2 font-medium">Category * <span className="font-normal text-zinc-500">(one or more)</span></legend>
+        <legend className="mb-2 font-medium">Category * <span className="font-normal text-stone-500">(one or more)</span></legend>
         <div className="flex flex-wrap gap-x-5 gap-y-2">
           {CATEGORIES.map((c) => (
             <label key={c} className="flex items-center gap-2">
@@ -119,7 +119,7 @@ function Field({ label, htmlFor, hint, children }: {
   return (
     <div className="flex flex-col gap-1.5">
       <label htmlFor={htmlFor} className="font-medium">{label}</label>
-      {hint && <p className="text-sm text-zinc-500 dark:text-zinc-400">{hint}</p>}
+      {hint && <p className="text-sm text-stone-500 dark:text-stone-400">{hint}</p>}
       {children}
     </div>
   );

@@ -12,7 +12,7 @@ export default function Avatar() {
   ) : (
     <div
       aria-hidden
-      className="flex h-28 w-28 shrink-0 items-center justify-center rounded-full bg-zinc-200 text-3xl font-bold text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300"
+      className="flex h-28 w-28 shrink-0 items-center justify-center rounded-full bg-stone-200 text-3xl font-bold text-stone-600 dark:bg-stone-800 dark:text-stone-300"
     >
       {initials(PROFILE.name)}
     </div>
