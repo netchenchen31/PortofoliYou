@@ -1,7 +1,7 @@
 import Link from "next/link";
 import ProjectCard from "@/components/ProjectCard";
 import { CATEGORIES, type Category } from "@/lib/types";
-import { DUMMY_PROJECTS } from "@/lib/dummy-data";
+import { getProjects } from "@/lib/projects";
 
 // Projects screen: /projects shows everything, /projects?category=Animation
 // shows only projects whose category list includes "Animation".
@@ -11,9 +11,7 @@ export default async function ProjectsPage({ searchParams }: PageProps<"/project
   // Only accept one of the five known categories; anything else = show all.
   const selected = CATEGORIES.find((c) => c === raw) as Category | undefined;
 
-  const projects = selected
-    ? DUMMY_PROJECTS.filter((p) => p.category.includes(selected))
-    : DUMMY_PROJECTS;
+  const projects = await getProjects(selected);
 
   const chip =
     "rounded-full border px-4 py-1.5 text-sm font-medium transition";
@@ -55,13 +53,21 @@ export default async function ProjectsPage({ searchParams }: PageProps<"/project
       ) : (
         // Friendly empty state
         <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed border-zinc-300 px-6 py-16 text-center dark:border-zinc-700">
-          <p className="text-lg font-medium">No {selected} projects yet.</p>
-          <p className="text-zinc-500 dark:text-zinc-400">
-            New work is on the way. In the meantime, take a look at everything else.
+          <p className="text-lg font-medium">
+            {selected ? `No ${selected} projects yet.` : "No projects yet."}
           </p>
-          <Link href="/projects" className="mt-2 font-medium underline">
-            See all projects
-          </Link>
+          {selected ? (
+            <>
+              <p className="text-zinc-500 dark:text-zinc-400">
+                New work is on the way. In the meantime, take a look at everything else.
+              </p>
+              <Link href="/projects" className="mt-2 font-medium underline">
+                See all projects
+              </Link>
+            </>
+          ) : (
+            <p className="text-zinc-500 dark:text-zinc-400">New work is on the way — check back soon.</p>
+          )}
         </div>
       )}
     </main>

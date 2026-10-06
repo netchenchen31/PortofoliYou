@@ -2,12 +2,12 @@ import Link from "next/link";
 import ProjectCard from "@/components/ProjectCard";
 import { CATEGORIES } from "@/lib/types";
 import Avatar from "@/components/Avatar";
-import { DUMMY_PROJECTS } from "@/lib/dummy-data";
+import { getFeaturedProjects } from "@/lib/projects";
 import { PROFILE } from "@/lib/profile";
 
 // Home screen: intro + profile, category selector, featured projects.
-export default function Home() {
-  const featured = DUMMY_PROJECTS.filter((p) => p.featured);
+export default async function Home() {
+  const featured = await getFeaturedProjects();
 
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-16 px-4 py-12 sm:px-8">

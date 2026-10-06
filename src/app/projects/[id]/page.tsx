@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { DUMMY_PROJECTS } from "@/lib/dummy-data";
+import { getProject } from "@/lib/projects";
 import { toEmbedUrl } from "@/lib/media";
 
 // Project Detail screen: /projects/<id>
 export default async function ProjectDetailPage({ params }: PageProps<"/projects/[id]">) {
   const { id } = await params;
-  const project = DUMMY_PROJECTS.find((p) => p.id === id);
+  const project = await getProject(id);
 
   // Unknown id → show the friendly not-found screen (not-found.tsx next to this file)
   if (!project) notFound();

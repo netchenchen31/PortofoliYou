@@ -72,6 +72,12 @@ export default function ContactForm() {
         {error("message")}
       </div>
 
+      {state.errors.form && (
+        <p role="alert" className="rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700 dark:bg-red-950 dark:text-red-300">
+          {state.errors.form}
+        </p>
+      )}
+
       <button
         type="submit"
         disabled={pending}

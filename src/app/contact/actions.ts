@@ -1,9 +1,10 @@
 "use server";
 
 // Runs on the server when the Contact form is submitted.
-// Phase 2: checks the fields only — nothing is saved yet and no email is sent.
-// Phase 3: after the checks pass, the message is saved to contact_submissions.
+// Checks the fields, then saves the message to the contact_submissions table.
+// No email is sent; you read messages in the Admin Dashboard.
 
+import { supabase } from "@/lib/supabase";
 import { emptyContactState, type ContactField, type ContactState } from "./state";
 
 // Same rule as the email check in supabase/schema.sql
@@ -31,7 +32,20 @@ export async function sendContact(
     return { status: "error", errors, values };
   }
 
-  // TODO (Phase 3): save `values` to the contact_submissions table here.
+  // submitted_at is filled in by the database. No .select() afterwards:
+  // visitors are allowed to add messages but not to read them back.
+  const { error } = await supabase()
+    .from("contact_submissions")
+    .insert({ ...values, project_type: values.project_type || null });
+
+  if (error) {
+    console.error("Could not save contact message:", error.message);
+    return {
+      status: "error",
+      errors: { form: "Sorry, your message couldn't be sent. Please try again in a moment." },
+      values,
+    };
+  }
 
   return { ...emptyContactState, status: "success" };
 }

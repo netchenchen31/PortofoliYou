@@ -5,7 +5,7 @@ export type ContactField = "name" | "email" | "project_type" | "message";
 
 export type ContactState = {
   status: "idle" | "error" | "success";
-  errors: Partial<Record<ContactField, string>>;
+  errors: Partial<Record<ContactField | "form", string>>; // "form" = problem not tied to one field
   values: Record<ContactField, string>; // so the form keeps what was typed after an error
 };
 
